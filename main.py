@@ -1,8 +1,11 @@
 import nest_asyncio
 import discord
-import requests
-from bs4 import BeautifulSoup
+
+# from bs4 import BeautifulSoup
+
+
 from bot_token import TOKEN
+from parse import get_voltage
 
 nest_asyncio.apply()
 intents = discord.Intents.default()
