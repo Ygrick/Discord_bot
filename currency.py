@@ -1,14 +1,18 @@
-from parse import get_voltage
-def get_cur():
-    pass
+from table import get_voltage
 
-def get_cur_by_letter():
-    pass
 
-def gef_cur_by_number():
-    pass
+def get_cur(messege):
+    df_modified = get_voltage().set_index('name_key')
+    df_modified_number_key = get_voltage().set_index('number_key')
+    df_modified_name_currency = get_voltage().set_index('name_currency')
 
-def gef_cur_by_keyword():
-    pass
-    # я уже жалею, что всё это затеял
-
+    try:
+        return str(df_modified.loc[messege, 'rate']) + ' рублей'
+    except KeyError:
+        try:
+            return str(df_modified_number_key.loc[messege, 'rate']) + ' рублей'
+        except KeyError:
+            try:
+                return str(df_modified_name_currency.loc[messege, 'rate']) + ' рублей'
+            except KeyError:
+                return "Нет такой валюты"

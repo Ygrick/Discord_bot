@@ -1,6 +1,7 @@
 import requests
 import pandas as pd
 import re
+import discord
 
 
 def get_voltage():
@@ -45,3 +46,4 @@ def get_voltage():
     # убрали столбец "цена за Х ед." и сделали общую таблицу df
     table_course = table_course.drop('multiplier', axis=1)
     df = pd.concat([table_key, table_course], axis=1)
+    return df

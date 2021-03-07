@@ -1,24 +1,17 @@
 import nest_asyncio
 import discord
-
+from currency import get_cur
+from table import get_voltage
 # from bs4 import BeautifulSoup
 
+TOKEN = "ODEwMDg4ODQ3MDk3NDYyNzk2.YCekBw.7MADVjHD6NQdJiuc8-ZYQz6KS9o"
 
-from bot_token import TOKEN
-from parse import get_voltage
+
 
 nest_asyncio.apply()
 intents = discord.Intents.default()
 intents.members = True  # Subscribe to the privileged members intent.
 client = discord.Client(intents=intents)
-
-
-def get_dollar():
-    html = requests.get('https://www.cbr.ru/').text
-    soup = BeautifulSoup(html)
-    mydivs = soup.findAll("div", {"class": "col-md-2 col-xs-9 _right mono-num"})
-    return (mydivs[0].text)
-
 
 @client.event
 async def on_ready():
@@ -27,9 +20,12 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
+
     if message.author == client.user:
         return
-    if message.content.startswith('курс доллара'):
-        await message.channel.send(get_dollar())
+
+    if message.content.startswith(message.content):
+        await message.channel.send(get_cur(message.content))
+
 
 client.run(TOKEN)
