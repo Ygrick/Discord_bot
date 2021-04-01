@@ -1,5 +1,6 @@
 import requests
 import pandas as pd
+from bs4 import BeautifulSoup
 import re
 
 
@@ -45,3 +46,8 @@ def get_voltage():
     # убрали столбец "цена за Х ед." и сделали общую таблицу df
     table_course = table_course.drop('multiplier', axis=1)
     df = pd.concat([table_key, table_course], axis=1)
+    return df['rate'][0]
+
+
+print(get_voltage())
+
