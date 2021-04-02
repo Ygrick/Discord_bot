@@ -11,3 +11,4 @@ def get_period(fromDate, toDate, Rcode):
     for n in range(table.shape[0]):
         table['rate'][n] /= table['multiplier'][n]*10000
     table = table.drop('multiplier', axis=1)
+    return table
