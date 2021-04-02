@@ -1,6 +1,8 @@
 import pandas as pd
 
 
+# На вход имя валюты (example: 'Japanese Yen')
+# На выходе Rcode валюты (example: 'R01820')
 def getRcode(message):
     df = pd.read_csv('file1.csv', delimiter=',')
     df.drop('Unnamed: 0', axis=1)

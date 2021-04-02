@@ -1,7 +1,7 @@
 from lxml import objectify
 import pandas as pd
 
-
+# создание df Rcode
 def createTableRcode():
     root_node = (objectify.parse('http://www.cbr.ru/scripts/XML_val.asp?d=0')).getroot()
     data = []
