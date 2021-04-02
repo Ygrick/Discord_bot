@@ -2,7 +2,7 @@ from lxml import objectify
 import pandas as pd
 
 
-def getTableRcode():
+def createTableRcode():
     root_node = (objectify.parse('http://www.cbr.ru/scripts/XML_val.asp?d=0')).getroot()
     data = []
     for tag in root_node.findall('Item'):
