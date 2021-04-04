@@ -38,10 +38,8 @@ def get_voltage():
     # объединили табл1 и табл2 удалив "повторюшку"
     table_course = (pd.concat([table_currency, table_course], axis=1)).drop('currency',
                                                                             axis=1)
-
     # в "цена валюты" сделали сумму за 1 ед. валюты
-    for n in range(149):
-        table_course['rate'][n] /= table_course['multiplier'][n]
+    table_course['rate'] = table_course['rate']/table_course['multiplier']
 
     # убрали столбец "цена за Х ед." и сделали общую таблицу df
     table_course = table_course.drop('multiplier', axis=1)
