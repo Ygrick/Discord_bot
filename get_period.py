@@ -11,7 +11,6 @@ def get_period(fromDate, toDate, Rcode):
     table = ((pd.concat(pd.read_html(html), ignore_index = True)).drop(index=[0,1])).reset_index(drop=True)
     table.columns = ['date', 'multiplier', 'rate']
     table['rate'], table['multiplier'] = pd.to_numeric(table['rate'],downcast = "float"), pd.to_numeric(table['multiplier'])
-    table['date'] = pd.to_datetime(table['date'])
     for n in range(table.shape[0]):
         table['rate'][n] /= table['multiplier'][n]*10000
     table = table.drop('multiplier', axis=1)
