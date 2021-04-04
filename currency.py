@@ -1,35 +1,19 @@
-from parse import get_voltage
+
+from table import get_voltage
 
 
-def get_cur(cur):
-    if str(cur).isdigit():
-        return get_cur_by_number(int(cur))
-    else:
-        return get_cur_by_letter(cur.upper())
+def get_cur(message):
+    df_modified = get_voltage().set_index('name_key')
+    df_modified_number_key = get_voltage().set_index('number_key')
+    df_modified_name_currency = get_voltage().set_index('name_currency')
 
-
-def get_cur_by_letter(cur):
-    df = get_voltage()
-    ser = df[df['name_key']==cur].drop_duplicates()
-    if ser is not None:
-        val = list(ser['rate'])[0]
-        name = list(ser['name_currency'])[0]
-        return (f'{round(val,3)} р. за 1 {name}')
-    else:
-        return 'информация отсутствует'
-
-
-def get_cur_by_number(cur):
-    df = get_voltage()
-    ser = df[df['number_key']==cur].drop_duplicates()
-    if ser is not None:
-        val = list(ser['rate'])[0]
-        name = list(ser['name_currency'])[0]
-        return (f'{round(val, 3)} р. за 1 {name}')
-    else:
-        return 'информация отсутствует'
-
-
-def get_cur_by_keyword():
-    pass
-    # я уже жалею, что всё это затеял
+    try:
+        return str(df_modified.loc[message, 'rate']) + ' рублей'
+    except KeyError:
+        try:
+            return str(df_modified_number_key.loc[message, 'rate']) + ' рублей'
+        except KeyError:
+            try:
+                return str(df_modified_name_currency.loc[message, 'rate']) + ' рублей'
+            except KeyError:
+                return "Нет такой валюты"

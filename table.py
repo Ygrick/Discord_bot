@@ -1,7 +1,8 @@
 import requests
 import pandas as pd
 import re
-# import discord
+
+
 import datetime, threading
 
 
@@ -51,6 +52,7 @@ def get_voltage():
     return df
 
 
+
 TABLE = get_voltage()
 
 def update():
@@ -58,4 +60,5 @@ def update():
     TABLE = get_voltage()
     print('таблица обновлена', datetime.datetime.now())
     threading.Timer(30, update).start()
+
 
