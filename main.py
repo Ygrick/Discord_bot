@@ -7,11 +7,11 @@ from table import get_voltage
 TOKEN = "ODEwMDg4ODQ3MDk3NDYyNzk2.YCekBw.7MADVjHD6NQdJiuc8-ZYQz6KS9o"
 
 
-
 nest_asyncio.apply()
 intents = discord.Intents.default()
 intents.members = True  # Subscribe to the privileged members intent.
 client = discord.Client(intents=intents)
+
 
 @client.event
 async def on_ready():
@@ -20,7 +20,6 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
-
     if message.author == client.user:
         return
 
