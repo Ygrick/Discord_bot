@@ -1,7 +1,10 @@
 import requests
 import pandas as pd
 import re
-import discord
+
+
+import datetime, threading
+
 
 
 def get_voltage():
@@ -45,3 +48,15 @@ def get_voltage():
     table_course = table_course.drop('multiplier', axis=1)
     df = pd.concat([table_key, table_course], axis=1)
     return df
+
+
+
+TABLE = get_voltage()
+
+def update():
+
+    TABLE = get_voltage()
+    print('таблица обновлена', datetime.datetime.now())
+    threading.Timer(30, update).start()
+
+
