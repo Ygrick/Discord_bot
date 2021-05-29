@@ -44,6 +44,8 @@ async def on_message(message):
         # print(content)
         print(curr)
         # await message.channel.send(img)
+    if message.content.startswith(prefix + 'prediction'):
+        await message.channel.send("Пока в разработке")
 
 
 if __name__ == "__main__":
