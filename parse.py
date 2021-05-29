@@ -1,8 +1,11 @@
+from pandas import read_html as pdrd
+from pandas import concat as pdcn
+from re import findall as refa
+from requests import get as rqget
+
+
 def get_voltage():
-    from pandas import read_html as pdrd
-    from pandas import concat as pdcn
-    from re import findall as refa
-    from requests import get as rqget
+
 
     #####################################################
     # Я конечно не эксперт, но этот код явно "НЕ ОЧЕНЬ" #
