@@ -16,7 +16,7 @@ from get_period import get_period
 def get_prediction(curr):
     today = datetime.datetime.today()
     tomorrow = (today + datetime.timedelta(days=1))
-    df = get_period('01.01.2016', today, getRcode(curr))  # с 2016 по текущее с Rcode нужным
+    df = get_period('01.01.2019', today, getRcode(curr))  # с 2016 по текущее с Rcode нужным
     new_row = {'date': [tomorrow], 'rate': [0]}
     new_df = pd.DataFrame(new_row)
     df = pd.concat([df, new_df])
@@ -43,6 +43,7 @@ def get_prediction(curr):
     # а именно входные данные
     new_df = df[-1:]
     df.drop(df.tail(1).index, inplace=True)
+    #     print(df)
     # разметка на тестовые и тренировочные данные
     x = df.drop('rate', axis=1)
     y = df['rate']
@@ -54,11 +55,11 @@ def get_prediction(curr):
 
     # метрика
     prediction = model.predict(X_test)
-    print(mean_absolute_error(y_test, prediction))
-    print(max_error(y_test, prediction))
+    #     print(mean_absolute_error(y_test, prediction))
+    #     print(max_error(y_test, prediction))
 
     # предсказание
-    return model.predict(new_df.drop('rate', axis=1))
+    return model.predict(new_df.drop('rate', axis=1))[0]
 
 
-print(get_prediction('Доллар США'))
+

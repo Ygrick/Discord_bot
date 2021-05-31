@@ -4,10 +4,12 @@ from currency import get_cur
 from table import update
 from table import get_voltage
 from get_period import get_image
+from get_prediction import get_prediction
+from tokens import TOKEN
 
 # from bs4 import BeautifulSoup
 
-TOKEN = "ODEwMDg4ODQ3MDk3NDYyNzk2.YCekBw.7MADVjHD6NQdJiuc8-ZYQz6KS9o"
+
 prefix = '!'
 
 nest_asyncio.apply()
@@ -28,8 +30,8 @@ async def on_message(message):
         return
 
     if message.content.startswith(prefix + 'cur'):
-        await message.channel.send(get_cur(message.content.split()[1]))
-        print(message.content.split()[1])
+        await message.channel.send(get_cur(' '.join(message.content.split()[1:])))
+        print(' '.join(message.content.split()[1:]))
 
     if message.content.startswith(prefix + 'range'):
         content = message.content.split()
@@ -44,6 +46,8 @@ async def on_message(message):
         print(curr)
         # await message.channel.send(img)
 
+    if message.content.startswith(prefix + 'pred'):
+        await message.channel.send("На завтра ожидается курс: "+str(round(get_prediction(' '.join(message.content.split()[1:])),5)))
 
 if __name__ == "__main__":
     client.run(TOKEN)

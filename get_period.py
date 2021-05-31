@@ -14,8 +14,8 @@ def get_period(fromDate, toDate, Rcode):
     table.columns = ['date', 'multiplier', 'rate']
     table['rate'], table['multiplier'] = pd.to_numeric(table['rate'],downcast = "float"), pd.to_numeric(table['multiplier'])
     table['date'] = pd.to_datetime(table['date'],format="%d.%m.%Y")
-    for n in range(table.shape[0]):
-        table['rate'][n] /= table['multiplier'][n]*10000
+    # for n in range(table.shape[0]):
+    table['rate'] /= table['multiplier']*10000
     table = table.drop('multiplier', axis=1)
     table = table.iloc[::-1].reset_index(drop=True)
     return table
