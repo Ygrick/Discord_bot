@@ -54,7 +54,6 @@ def get_voltage():
 TABLE = get_voltage()
 
 def update():
-
     TABLE = get_voltage()
     print('таблица обновлена', datetime.datetime.now())
     threading.Timer(30, update).start()

@@ -7,7 +7,6 @@ import sklearn
 import numpy
 import requests
 import pandas as pd
-from matplotlib import pyplot as plt
 import datetime
 from getRcode import getRcode
 from get_period import get_period
@@ -21,8 +20,6 @@ def get_prediction(curr):
     new_df = pd.DataFrame(new_row)
     df = pd.concat([df, new_df])
 
-    # df['date'] = pd.to_datetime(df['date']).dt.date
-    # df['date'] = pd.to_datetime(df['date'],format="%d.%m.%Y")
     # разбиение даты на года\месяцы\недели
     df["weekday"] = df["date"].dt.weekday
     df["month"] = df["date"].dt.month
